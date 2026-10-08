@@ -51,6 +51,12 @@ def _num(x):
 def _plot(div_id, traces, layout, height=380):
     layout = {"height": height, "margin": {"l": 60, "r": 20, "t": 40, "b": 40},
               "legend": {"orientation": "h", "y": -0.2}, "hovermode": "x unified", **layout}
+    # Charts with a range slider: slim the slider and drop the legend below it so they don't overlap.
+    slider = layout.get("xaxis", {}).get("rangeslider")
+    if slider and slider.get("visible"):
+        slider.setdefault("thickness", 0.08)
+        layout["legend"] = {"orientation": "h", "x": 0, "y": -0.32, "yanchor": "top"}
+        layout["height"] = height + 40
     return (f'<div id="{div_id}"></div>\n<script>Plotly.newPlot("{div_id}", '
             f'{json.dumps(traces)}, {json.dumps(layout)}, {{responsive: true}});</script>')
 
@@ -385,24 +391,6 @@ def traffic_panels(actuals, schedules, pw, pw_types_path="portwatch_panama_lates
               for t in types]
     out.append(_plot("tr_types", traces, _time_layout("PortWatch weekly transits by vessel type (stacked)",
                                                        "transits per week"), height=430))
-
-    # Dry bulk watch: count vs same week last year, and share of the PortWatch total
-    db = weekly_t["dry_bulk"]
-    share = db / weekly_t.sum(axis=1)
-    last_year = db.shift(52)
-    traces = [
-        {"x": _d(db.index), "y": _num(db), "name": "Dry bulk (this year)", "mode": "lines",
-         "line": {"color": "#8c564b"}},
-        {"x": _d(db.index), "y": _num(last_year), "name": "Same week, a year earlier", "mode": "lines",
-         "line": {"color": "#c49c94", "dash": "dot"}},
-        {"x": _d(share.index), "y": _num(share), "name": "Dry bulk share of PortWatch total", "mode": "lines",
-         "yaxis": "y2", "line": {"color": "#555", "width": 1}},
-    ]
-    lay = _time_layout("Dry bulk watch (PortWatch): a rebound here would likely lift the ratio",
-                       "dry bulk transits per week")
-    lay["yaxis2"] = {"title": "share", "overlaying": "y", "side": "right", "tickformat": ".0%",
-                     "showgrid": False}
-    out.append(_plot("tr_bulk", traces, lay, height=400))
 
     # Canal (ACP) vs PortWatch, transits per day
     traces = []
