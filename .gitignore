@@ -1,0 +1,30 @@
+# raw downloads (large)
+booking_snapshots/
+dcr/
+portwatch/
+
+# data files (collected locally)
+*.csv
+
+# tuned model parameters - publish estimations.example.json instead
+estimations.json
+
+# private notes on the tuned values
+forecasts_guide.txt
+
+# generated output
+reports/
+logs/
+dashboard*.html
+
+# secrets
+.env
+*.pem
+*.key
+
+# Python and Jupyter clutter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/

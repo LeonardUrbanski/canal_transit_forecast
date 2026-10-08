@@ -1,0 +1,55 @@
+{
+  "_about": "Template. Copy to estimations.json. Values are generic placeholders; update_estimations() re-measures the ones the collected data supports.",
+  "schedule_sd": {
+    "value": {
+      "0": 1.0,
+      "1": 1.5,
+      "2": 2.5
+    },
+    "source": "placeholder"
+  },
+  "gap_mean": {
+    "value": 0.0,
+    "source": "placeholder"
+  },
+  "gap_sd": {
+    "value": 2.0,
+    "source": "placeholder"
+  },
+  "cap_excess": {
+    "value": 0.0,
+    "source": "placeholder"
+  },
+  "cap_sd": {
+    "value": 3.0,
+    "source": "placeholder"
+  },
+  "ratio_noise_default": {
+    "value": 0.03,
+    "source": "placeholder"
+  },
+  "ratio_sd_floor": {
+    "value": 0.03,
+    "source": "placeholder"
+  },
+  "ratio_halflife_weeks": {
+    "value": 3.0,
+    "source": "placeholder"
+  },
+  "disruption_prob_per_day": {
+    "value": 0.02,
+    "source": "placeholder"
+  },
+  "disruption_shortfall": {
+    "value": 10,
+    "source": "placeholder"
+  },
+  "disruption_pw_passthrough": {
+    "value": 1.0,
+    "source": "placeholder"
+  },
+  "disruption_days": {
+    "value": [],
+    "source": "placeholder"
+  }
+}
